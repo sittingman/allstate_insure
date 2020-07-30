@@ -15,16 +15,16 @@
 
 ### Data Source:
 - [Kaggle](https://www.kaggle.com/c/allstate-claims-severity/data)
-    - To obtain data, download from the link above, unzip and put all csv files into a folder called "data" OR using the script [HERE](https://github.com/sittingman/allstate_loss/blob/master/0.obtain_data.ipynb)
+    - To obtain data, download from the link above, unzip and put all csv files into a folder called "data" OR using the script [HERE](https://github.com/sittingman/allstate_insure/blob/master/0.obtain_data.ipynb)
 - Data Dictionary: datasets given had 116 category variables and 14 numeric variables, followed by target variable "loss." Allstate did not provide definitions on the attributes; hence data dictionary is not available.
 
 ### Outline of Approach
 
-#### [Data Cleansing/Wrangling](https://github.com/sittingman/allstate_loss/blob/master/1.data_wrangling.ipynb): 
+#### [Data Cleansing/Wrangling](https://github.com/sittingman/allstate_insure/blob/master/1.data_wrangling.ipynb): 
 Understanding the shape of the datasets, check for missing value, and invalid records.
 - Findings: no missing data. Categories valuables have alphabetical values (i.e., A, B, HK, etc.); continuous variables have values ranging from 0-1. Target variable ('loss') has absolute dollar values
 
-#### [Exploratory Analysis](https://github.com/sittingman/allstate_loss/blob/master/2.exploratory.ipynb): 
+#### [Exploratory Analysis](https://github.com/sittingman/allstate_insure/blob/master/2.exploratory.ipynb): 
 Finding variables may correlate with the target variable and eliminate variables that have collinearity. Determine proper transformation based on data structure
 - Findings: cont9, cont10, cont12, and cont13 will be dropped as they are highly correlated with existing variables.
 - Target variable will require power transformation during model fitting
@@ -32,9 +32,9 @@ Finding variables may correlate with the target variable and eliminate variables
     
 #### Machine Learning: 
 **Strategy**:
-- [Part 1](https://github.com/sittingman/allstate_loss/blob/master/3.ML_p1.ipynb)Identify the best machine learning algorithm based on continuous variables to obtain baseline performance
-- [Part 2](https://github.com/sittingman/allstate_loss/blob/master/3.ML_p2.ipynb) Add categorical variables and apply RFE to filter low power features, re-train models, find the best performers
-- [Fine tune models](https://github.com/sittingman/allstate_loss/blob/master/4.submit.ipynb) through hyperparameters tuning
+- [Part 1](https://github.com/sittingman/allstate_insure/blob/master/3.ML_p1.ipynb)Identify the best machine learning algorithm based on continuous variables to obtain baseline performance
+- [Part 2](https://github.com/sittingman/allstate_insure/blob/master/3.ML_p2.ipynb) Add categorical variables and apply RFE to filter low power features, re-train models, find the best performers
+- [Fine tune models](https://github.com/sittingman/allstate_insure/blob/master/4.submit.ipynb) through hyperparameters tuning
     
 **Findings:**
 - Boosting models perform better than tree base models, which has equivalent performances as linear models. Yet, tree base models have a long processing time. They are not recommended models for this problem.
@@ -74,11 +74,11 @@ CatBoost has the best MAE among all models, followed closely by LightGBM.
 
 While the evaluation metric is MAE, clients should be aware it is the average of above 120k insurance claims. MAE understated the impact from outliers to customer satisfaction, particularly for claims payments that are significantly underestimated from the true reimbursement that clients should get. On the other hand, there are low-value claims with high loss predictions. That will result in unnecessary final burdens to Allstate.
 
-The model can be further improved if the definitions of the categorical and continuous variables are given. It will help practitioners to perform more precise features selection and target the outlier issues with a better context. From a high-level, exploratory analysis on the [outliers](https://github.com/sittingman/allstate_loss/blob/master/3.ML-outliers.ipynb), over predictions tend to happen more often at the low-value claims, while under predictions happen toward claims $15K or more in values.
+The model can be further improved if the definitions of the categorical and continuous variables are given. It will help practitioners to perform more precise features selection and target the outlier issues with a better context. From a high-level, exploratory analysis on the [outliers](https://github.com/sittingman/allstate_insure/blob/master/3.ML-outliers.ipynb), over predictions tend to happen more often at the low-value claims, while under predictions happen toward claims $15K or more in values.
 
 We recommend Allstate to perform audits for claims that have high predicted values (threshold to be determined by Allstate management based on tolerance level). Make it is easy for customers to report inaccurate claims to analyze the miscalculated factors and adjust models accordingly.
 
 
-[Capstone Report](https://github.com/sittingman/allstate_loss/blob/master/capstone_report_allstate.pdf)
+[Capstone Report](https://github.com/sittingman/allstate_insure/blob/master/capstone_report_allstate.pdf)
 
-[Presentation Slides](https://github.com/sittingman/allstate_loss/blob/master/allstate_present.pdf)
+[Presentation Slides](https://github.com/sittingman/allstate_insure/blob/master/allstate_present.pdf)
